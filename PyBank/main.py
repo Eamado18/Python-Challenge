@@ -6,12 +6,13 @@ Bank_csv = os.path.join('PyBank',"Resources","budget_data.csv")
 
 Date_rows = 0
 Net_total = 0 
+Profit_Losses = []
+Profit_Losses_change = []
 
 with open(Bank_csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     
     csv_header = next(csvreader)
-
 
 #The total number of months included in the dataset
     for row in csvreader:
@@ -19,10 +20,21 @@ with open(Bank_csv) as csvfile:
     
 #The net total amount of "Profit/Losses" over the entire period
       Net_total = Net_total + int(row[1]) 
-    print ("Total : ", "$", (Net_total))
-    print ("Total Months : ", (Date_rows)) 
+
 #Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
+      Profit_Losses.append(int(row[1])) 
+      
+      for i in range(len(Profit_Losses)-1):
+        Profit_Losses_change.append(Profit_Losses[i+1]-Profit_Losses[i])
 
-#The greatest increase in profits (date and amount) over the entire period
+max_increase_value = max(Profit_Losses_change)
+max_increase_month = row[0]
+max_decrease_value = min(Profit_Losses_change)
+max_decrease_month = row[0]
+ 
 
-#The greatest decrease in profits (date and amount) over the entire period
+print ("Total : ", "$", (Net_total))
+print ("Total Months : ", (Date_rows)) 
+print (f"Average Change: {round(sum(Profit_Losses_change)/len(Profit_Losses_change),2)}")
+print ("Greatest Increase in Profits: ", max_increase_month, f"${(int(max_increase_value))}") 
+print ("Greatest Decrease in Profits: ", max_decrease_month, f"${(int(max_decrease_value))}") 
