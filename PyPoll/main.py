@@ -6,7 +6,6 @@ import csv
 Vote_count = 0
 Candidates = {}
 
-
 Election_data_csv = os.path.join('PyPoll',"Resources","PyPoll_Resources_election_data.csv")
 
 with open(Election_data_csv) as csvfile:
@@ -28,7 +27,7 @@ C_percent = "{:.3%}".format(Candidates['Correy'] / Vote_count)
 L_percent = "{:.3%}".format(Candidates['Li'] / Vote_count)
 O_percent = "{:.3%}".format(Candidates["O'Tooley"] / Vote_count) 
 
-
+Candidates_4 = Candidates["O'Tooley"]
 
 print("Election Results")
 print("--------------------------")
@@ -47,10 +46,11 @@ output_file = os.path.join("PyPoll", "Analysis","Analysis.txt")
 with open(output_file, "w") as file: 
     file.write("Election Results")
     file.write('\n' +"-----------------------------")
-    file.write('\n' +"Total Votes:" + str(Vote_count))
+    file.write('\n' +"Total Votes: " + str(Vote_count))
     file.write('\n' +"Khan: "+ (f"({(str(Candidates['Khan']))})")+ (K_percent))
     file.write('\n' +"Correy: "+ (f"({(str(Candidates['Correy']))})")+ (C_percent))
     file.write('\n' +"Li: "+ (f"({(str(Candidates['Li']))})")+ (L_percent))
+    file.write('\n' +"O'Tooley "+ (f"({(str(Candidates_4))})")+ (L_percent))
     file.write('\n' +"-----------------------------")
     file.write('\n' +"Winner: Khan") 
     file.write('\n' +"-----------------------------")
